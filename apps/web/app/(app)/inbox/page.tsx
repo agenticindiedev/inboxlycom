@@ -16,12 +16,12 @@ export default function InboxPage() {
     <>
       <div className="flex h-full">
         {/* Inbox List */}
-        <div className="flex w-96 flex-col border-r">
-          <div className="flex items-center justify-between border-b p-4">
-            <h1 className="font-semibold text-xl">Inbox</h1>
+        <div className="flex w-96 flex-col border-r border-border bg-card">
+          <div className="flex items-center justify-between border-b border-border p-4">
+            <h1 className="font-semibold text-xl text-foreground">Inbox</h1>
             <button
               onClick={() => setShowCompose(true)}
-              className="flex items-center gap-2 rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+              className="flex items-center gap-2 rounded bg-primary px-4 py-2 text-primary-foreground hover:bg-primary/90"
             >
               <Plus className="h-4 w-4" />
               Compose

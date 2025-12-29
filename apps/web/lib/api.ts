@@ -56,6 +56,63 @@ export interface EmailThread {
   aiSummary?: string;
 }
 
+export interface EmailAccount {
+  id: string;
+  provider: 'gmail' | 'outlook' | 'imap';
+  email: string;
+  lastSyncAt?: string;
+  isConnected: boolean;
+}
+
+export interface CreateImapAccountData {
+  email: string;
+  password: string;
+  imapHost: string;
+  imapPort: number;
+  imapSecure: boolean;
+  smtpHost: string;
+  smtpPort: number;
+  smtpSecure: boolean;
+}
+
+export const accountsApi = {
+  getAccounts: (): Promise<EmailAccount[]> => {
+    return apiRequest('/accounts');
+  },
+
+  getAccount: (accountId: string): Promise<EmailAccount> => {
+    return apiRequest(`/accounts/${accountId}`);
+  },
+
+  createImapAccount: (data: CreateImapAccountData): Promise<EmailAccount> => {
+    return apiRequest('/accounts/imap', {
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+  },
+
+  deleteAccount: (accountId: string): Promise<void> => {
+    return apiRequest(`/accounts/${accountId}`, {
+      method: 'DELETE',
+    });
+  },
+
+  getGoogleAuthUrl: (): Promise<{ url: string }> => {
+    return apiRequest('/accounts/google/auth-url');
+  },
+
+  connectGoogle: (code: string): Promise<EmailAccount> => {
+    return apiRequest('/accounts/google/callback', {
+      method: 'POST',
+      body: JSON.stringify({ code }),
+    });
+  },
+
+  testConnection: (accountId: string): Promise<{ success: boolean; error?: string }> => {
+    return apiRequest(`/accounts/${accountId}/test`);
+  },
+};
+
 export const emailsApi = {
   syncAccount: (accountId: string): Promise<{ synced: number }> => {
     return apiRequest(`/emails/accounts/${accountId}/sync`);

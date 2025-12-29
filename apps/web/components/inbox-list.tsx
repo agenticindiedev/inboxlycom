@@ -20,6 +20,8 @@ export default function InboxList({ accountId }: InboxListProps) {
     setLoading,
     setError,
     currentFolder,
+    loading,
+    error,
   } = useEmailStore();
 
   useEffect(() => {
@@ -44,26 +46,26 @@ export default function InboxList({ accountId }: InboxListProps) {
     setSelectedEmail(thread.emails[thread.emails.length - 1] || null);
   };
 
-  if (useEmailStore((state) => state.loading)) {
+  if (loading) {
     return (
-      <div className="flex h-full items-center justify-center">
-        <div className="text-gray-500">Loading emails...</div>
+      <div className="flex h-full items-center justify-center bg-card">
+        <div className="text-muted-foreground">Loading emails...</div>
       </div>
     );
   }
 
-  if (useEmailStore((state) => state.error)) {
+  if (error) {
     return (
-      <div className="flex h-full items-center justify-center">
-        <div className="text-red-500">{useEmailStore((state) => state.error)}</div>
+      <div className="flex h-full items-center justify-center bg-card">
+        <div className="text-destructive">{error}</div>
       </div>
     );
   }
 
   return (
-    <div className="flex h-full flex-col overflow-y-auto">
+    <div className="flex h-full flex-col overflow-y-auto bg-card">
       {threads.length === 0 ? (
-        <div className="flex h-full items-center justify-center text-gray-500">No emails found</div>
+        <div className="flex h-full items-center justify-center text-muted-foreground">No emails found</div>
       ) : (
         threads.map((thread) => {
           const lastEmail = thread.emails[thread.emails.length - 1];
@@ -74,38 +76,38 @@ export default function InboxList({ accountId }: InboxListProps) {
             <div
               key={thread.id}
               onClick={() => handleThreadClick(thread)}
-              className={`cursor-pointer border-b p-4 transition-colors ${isSelected ? 'border-blue-200 bg-blue-50' : 'hover:bg-gray-50'}
+              className={`cursor-pointer border-b border-border p-4 transition-colors ${isSelected ? 'bg-accent' : 'hover:bg-accent/50'}
                 ${isUnread ? 'font-semibold' : ''}
               `}
             >
               <div className="flex items-start gap-3">
                 <div className="mt-1">
                   {isUnread ? (
-                    <Mail className="h-5 w-5 text-blue-600" />
+                    <Mail className="h-5 w-5 text-primary" />
                   ) : (
-                    <MailOpen className="h-5 w-5 text-gray-400" />
+                    <MailOpen className="h-5 w-5 text-muted-foreground" />
                   )}
                 </div>
                 <div className="min-w-0 flex-1">
                   <div className="mb-1 flex items-center justify-between">
-                    <div className="truncate font-medium text-gray-900 text-sm">
+                    <div className="truncate font-medium text-foreground text-sm">
                       {lastEmail?.from.name || lastEmail?.from.address || 'Unknown'}
                     </div>
-                    <div className="ml-2 text-gray-500 text-xs">
+                    <div className="ml-2 text-muted-foreground text-xs">
                       {lastEmail?.date ? format(new Date(lastEmail.date), 'MMM d') : ''}
                     </div>
                   </div>
-                  <div className="mb-1 truncate text-gray-700 text-sm">
+                  <div className="mb-1 truncate text-foreground/80 text-sm">
                     {thread.subject || '(No Subject)'}
                   </div>
                   {lastEmail?.body.text && (
-                    <div className="truncate text-gray-500 text-xs">
+                    <div className="truncate text-muted-foreground text-xs">
                       {lastEmail.body.text.substring(0, 100)}
                       {lastEmail.body.text.length > 100 ? '...' : ''}
                     </div>
                   )}
                   {thread.emails.length > 1 && (
-                    <div className="mt-1 text-gray-400 text-xs">
+                    <div className="mt-1 text-muted-foreground/70 text-xs">
                       {thread.emails.length} messages
                     </div>
                   )}

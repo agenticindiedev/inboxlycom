@@ -8,7 +8,7 @@ export class Email {
   @Prop({ required: true, unique: true })
   messageId: string;
 
-  @Prop({ required: true, index: true })
+  @Prop({ required: true })
   threadId: string;
 
   @Prop({ required: true, index: true })

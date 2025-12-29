@@ -19,6 +19,6 @@ import { SyncService } from './services/sync.service';
   ],
   controllers: [EmailController],
   providers: [EmailService, ImapService, SmtpService, CacheService, SyncService, SearchService],
-  exports: [EmailService, SyncService, SearchService],
+  exports: [EmailService, SyncService, SearchService, CacheService],
 })
 export class EmailModule {}

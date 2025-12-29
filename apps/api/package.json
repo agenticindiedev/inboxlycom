@@ -1,13 +1,4 @@
 {
-  "name": "api",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "build": "nest build",
-    "dev": "nest start --watch",
-    "start": "nest start",
-    "start:prod": "node dist/main"
-  },
   "dependencies": {
     "@ai-email/shared": "workspace:*",
     "@nestjs/common": "11.1.11",
@@ -21,8 +12,8 @@
     "bullmq": "5.66.4",
     "class-transformer": "0.5.1",
     "class-validator": "0.14.3",
-    "ioredis": "5.8.2",
     "imap": "0.8.19",
+    "ioredis": "5.8.2",
     "mailparser": "3.9.1",
     "mongoose": "9.0.2",
     "nodemailer": "7.0.12",
@@ -42,5 +33,14 @@
     "ts-node": "10.9.2",
     "tsconfig-paths": "4.2.0",
     "typescript": "5.9.3"
-  }
+  },
+  "name": "api",
+  "private": true,
+  "scripts": {
+    "build": "nest build",
+    "dev": "bun --watch src/main.ts",
+    "start": "nest start",
+    "start:prod": "node dist/main"
+  },
+  "version": "0.1.0"
 }
