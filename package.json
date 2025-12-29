@@ -1,0 +1,30 @@
+{
+  "devDependencies": {
+    "@biomejs/biome": "2.3.10"
+  },
+  "name": "ai-email-client",
+  "packageManager": "bun@latest",
+  "private": true,
+  "scripts": {
+    "build": "bun --workspaces run build",
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
+    "dev": "bun --workspaces run dev",
+    "dev:api": "bun --filter api run dev",
+    "dev:web": "bun --filter web run dev",
+    "format": "biome format --write .",
+    "format:check": "biome format .",
+    "lint": "biome lint .",
+    "lint:fix": "biome lint --write .",
+    "pre:install": "bun update --latest --recursive && bun install",
+    "prepare:deploy": "bun install",
+    "start": "bun --workspaces run start"
+  },
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
+
+
