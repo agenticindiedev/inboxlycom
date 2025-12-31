@@ -29,7 +29,6 @@ yarn-error.log*
 lerna-debug.log*
 
 # IDE
-.vscode/
 .idea/
 *.swp
 *.swo
