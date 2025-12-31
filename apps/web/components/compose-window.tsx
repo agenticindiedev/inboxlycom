@@ -11,6 +11,7 @@ interface ComposeWindowProps {
     email: string;
     messageId: string;
     threadId: string;
+    subject?: string;
   };
 }
 

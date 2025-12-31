@@ -2,7 +2,8 @@
   "devDependencies": {
     "@biomejs/biome": "2.3.10"
   },
-  "name": "ai-email-client",
+  "name": "inboxly.com",
+  "description": "AI-powered email client with smart features",
   "packageManager": "bun@latest",
   "private": true,
   "scripts": {
@@ -26,5 +27,3 @@
     "packages/*"
   ]
 }
-
-

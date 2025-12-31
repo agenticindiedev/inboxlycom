@@ -160,3 +160,59 @@ export const emailsApi = {
     });
   },
 };
+
+export const aiApi = {
+  summarizeEmail: (text: string, html?: string): Promise<{ summary: string }> => {
+    return apiRequest('/ai/summarize/email', {
+      method: 'POST',
+      body: JSON.stringify({ text, html }),
+    });
+  },
+
+  summarizeThread: (emails: Array<{
+    subject: string;
+    body: string;
+    from: string;
+    date: string;
+  }>): Promise<{ summary: string }> => {
+    return apiRequest('/ai/summarize/thread', {
+      method: 'POST',
+      body: JSON.stringify({ emails }),
+    });
+  },
+
+  generateDraft: (
+    subject: string,
+    recipient: string,
+    context?: string,
+    tone?: 'professional' | 'casual' | 'friendly'
+  ): Promise<{ draft: string }> => {
+    return apiRequest('/ai/compose/generate', {
+      method: 'POST',
+      body: JSON.stringify({ subject, recipient, context, tone }),
+    });
+  },
+
+  generateReply: (
+    originalEmail: {
+      subject: string;
+      body: string;
+      from: string;
+    },
+    context?: string,
+    tone?: 'professional' | 'casual' | 'friendly'
+  ): Promise<{ reply: string }> => {
+    return apiRequest('/ai/auto-reply/generate', {
+      method: 'POST',
+      body: JSON.stringify({ originalEmail, context, tone }),
+    });
+  },
+
+  chat: (message: string, threadContext?: EmailThread): Promise<{ response: string }> => {
+    // This is a generic chat endpoint - you may need to create this in the backend
+    return apiRequest('/ai/chat', {
+      method: 'POST',
+      body: JSON.stringify({ message, threadContext }),
+    });
+  },
+};
