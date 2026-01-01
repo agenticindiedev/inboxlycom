@@ -3,10 +3,6 @@ import path from 'path';
 
 const nextConfig: NextConfig = {
   transpilePackages: ['@agenticindiedev/ui'],
-  sassOptions: {
-    includePaths: [path.join(__dirname, 'node_modules')],
-    silenceDeprecations: ['import'],
-  },
   // Empty turbopack config to acknowledge we have webpack config but want Turbopack
   turbopack: {},
   webpack: (config) => {
@@ -60,6 +56,7 @@ const nextConfig: NextConfig = {
                 sassOptions: {
                   ...loaderWithOptions.options?.sassOptions,
                   includePaths: [path.join(__dirname, 'node_modules')],
+                  silenceDeprecations: ['legacy-js-api'],
                 },
               };
             }

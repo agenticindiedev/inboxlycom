@@ -1,12 +1,4 @@
 {
-  "name": "web",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --port 3000",
-    "build": "next build",
-    "start": "next start"
-  },
   "dependencies": {
     "@agenticindiedev/ui": "*",
     "date-fns": "4.1.0",
@@ -22,8 +14,17 @@
     "@types/node": "25.0.3",
     "@types/react": "19.2.7",
     "@types/react-dom": "19.2.3",
-    "sass": "^1.97.1",
+    "sass": "1.97.1",
     "tailwindcss": "4.1.18",
     "typescript": "5.9.3"
-  }
+  },
+  "name": "web",
+  "private": true,
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --port 3000",
+    "pre:install": "bun update --latest --recursive && bun install",
+    "start": "next start"
+  },
+  "version": "0.1.0"
 }
